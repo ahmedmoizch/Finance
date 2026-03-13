@@ -6,11 +6,12 @@ import mysql.connector
 app = Flask(__name__)
 app.secret_key = "$$"
 
-session = {
+db_config = {
+    'host': 'localhost',
     'user': 'root',
-    'password': '123',
+    'password': '12345678',
+    'database': 'portfolio'
 }
-
 
 @app.route('/')
 def home():
@@ -18,8 +19,33 @@ def home():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if 'user' in session == 'root':
-        return redirect(url_for('home'))
+    if request.method == 'POST':
+        username = request.form.get('login_email')
+        passw = request.form.get('login_password')
+
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        cursor.execute("select exists ( select 1 from user_login where email = (%s) AND pass = (%s) ) AS is_valid;", (username, passw))
+
+        result = cursor.fetchone()
+        is_valid = result[0]
+
+        cursor.close()
+        connection.close()
+
+        if is_valid == 1:
+            return redirect(url_for('home'))
+        else:
+            print("Login failed")
+
+    return render_template('login.html')
+
+
+
+@app.route('/psx')
+def psx():
+    return render_template('psx.html')
 
 
 if __name__ == '__main__':
