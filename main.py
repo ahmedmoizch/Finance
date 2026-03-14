@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, session, request, redirect, url_for
 import mysql.connector
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = "$$"
@@ -45,17 +46,13 @@ def login():
 
 @app.route('/psx', methods=['GET','POST'])
 def psx():
-    connection = mysql.connector.connect(**db_config)
-    cursor = connection.cursor()
 
-    cursor.execute("select * from psx_history;")
-    data = cursor.fetchall()
-    print(data)
-    cursor.close()
-    connection.close()
+    df = pd.read_csv('psx_cache.csv')
+    heads = ['Symbol', 'Current', 'Volume']
+    data = df.values
 
 
-    return render_template('psx.html')
+    return render_template('psx.html', heads=heads, data=data)
 
 
 if __name__ == '__main__':

@@ -11,6 +11,18 @@
 <div id="head_bar"></div>
 <div id="databox">
 </div>
+<table>
+    <thead></thead>
+    <thebody>
+        {%for row in data%}
+        <tr>
+            {%for item in row%}
+            <td style="padding: 8px;">{{item}} </t>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </thebody>
+</table>>
 </div>
 
 </body>

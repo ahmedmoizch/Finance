@@ -3,10 +3,12 @@
 }
 
 body {
-    background-color: #181a20;
+    background-color: white;
 
 
 }
+
+/* Prevoius background color set after test: #181a20 */
 
 #head_bar {
     background-color: #181a20;
