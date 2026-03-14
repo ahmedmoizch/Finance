@@ -43,8 +43,18 @@ def login():
 
 
 
-@app.route('/psx')
+@app.route('/psx', methods=['GET','POST'])
 def psx():
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+
+    cursor.execute("select * from psx_history;")
+    data = cursor.fetchall()
+    print(data)
+    cursor.close()
+    connection.close()
+
+
     return render_template('psx.html')
 
 
