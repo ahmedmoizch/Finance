@@ -9,20 +9,28 @@
 
 <body>
 <div id="head_bar"></div>
-<div id="databox">
-</div>
+<div id="databox"></div>
+
+<div>
 <table>
-    <thead></thead>
-    <thebody>
+    <thead>
+    <tr style="background-color: #f2f2f2;">
+    {%for column in heads%}
+    <th style="padding: 10px; text-align: left;">{{column}}</th>
+    {% endfor %}
+    </tr>
+
+    </thead>
+    <tbody>
         {%for row in data%}
         <tr>
             {%for item in row%}
-            <td style="padding: 8px;">{{item}} </t>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{item}} </td>
             {%endfor%}
         </tr>
         {%endfor%}
-    </thebody>
-</table>>
+    </tbody>
+</table>
 </div>
 
 </body>

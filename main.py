@@ -48,7 +48,11 @@ def login():
 def psx():
 
     df = pd.read_csv('psx_cache.csv')
-    heads = ['Symbol', 'Current', 'Volume']
+    selected_col = ['SYMBOL', 'CURRENT','HIGH','LOW', 'VOLUME']
+
+    df = df[selected_col]
+
+    heads = df.columns
     data = df.values
 
 
