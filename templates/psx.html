@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +9,25 @@
 
 <body>
 <div id="head_bar"></div>
-<div id="databox"></div>
+<div id="filter">
+    <H2>Filters</H2>
 
-<div>
+    <!-- index.html -->
+<form action="/psx" method="POST">
+  <p>Select your favorite fruit:</p>
+  <input type="radio" id="apple" name="filter" value="Apple" onchange="this.form.submit()">
+  <label for="apple">Apple</label><br>
+
+  <input type="radio" id="banana" name="filter" value="Banana" onchange="this.form.submit()">
+  <label for="banana">Banana</label><br>
+
+  <input type="radio" id="cherry" name="filter" value="Cherry" onchange="this.form.submit()">
+  <label for="cherry">Cherry</label><br>
+
+</form>
+
+</div>
+<div id="psx_data">
 <table>
     <thead>
     <tr style="background-color: #f2f2f2;">

@@ -104,3 +104,11 @@ body {
     text-decoration: none;
 }
 
+
+
+#psx_data{
+    display: flex;
+    gap: 20px;
+    padding: 15px
+}
+

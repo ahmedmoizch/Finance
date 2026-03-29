@@ -20,7 +20,7 @@ for element in soup.find_all(class_=['tag tag--skim tag--def', 'tag tag--skim ta
 html_data = io.StringIO(str(soup))
 df = pd.read_html(html_data)
 dfs = df[0]
-dfs.to_csv('psx_cache.csv', index=False)
+dfs.to_csv('psx_current.csv', index=False)
 
 #Local DataBase
 db_config = {
@@ -33,7 +33,7 @@ db_config = {
 connection = mysql.connector.connect(**db_config)
 cursor = connection.cursor()
 
-df_sql = pd.read_csv('psx_cache.csv')
+df_sql = pd.read_csv('psx_current.csv')
 data = df_sql[['SYMBOL','CURRENT','VOLUME']]
 
 for index, row in data.iterrows():

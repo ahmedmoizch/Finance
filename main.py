@@ -46,14 +46,32 @@ def login():
 
 @app.route('/psx', methods=['GET','POST'])
 def psx():
-
+    """
     df = pd.read_csv('psx_cache.csv')
     selected_col = ['SYMBOL', 'CURRENT','HIGH','LOW', 'VOLUME']
-
     df = df[selected_col]
+    """
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
 
-    heads = df.columns
-    data = df.values
+    selection = request.form.get('filter')
+    if selection == 'Apple':
+        cursor.execute("select * from psx_history")
+
+    else:
+        cursor.execute("select * from psx_history")
+
+    #if data_filter == "all":
+        #cursor.execute("select * from psx_history")
+    #if data_filter == "high_vol":
+        #cursor.execute("select * from psx_history"
+                       #"order by volume ASC")
+
+    data = cursor.fetchall()
+    heads = cursor.column_names
+
+    connection.close()
+    cursor.close()
 
 
     return render_template('psx.html', heads=heads, data=data)
