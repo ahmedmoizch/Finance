@@ -1,0 +1,3 @@
+1: data will come in a csv file after scraping
+2: data will be cleaned, date and time will be added and then will be uploaded to a temporary MySQL table (more detailed data). This will be displayed aon website and used as cache (redis).
+3: data will be stored in a grand SQL table with previos history is also stored and will be used for analysis

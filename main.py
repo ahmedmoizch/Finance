@@ -11,7 +11,8 @@ db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': '12345678',
-    'database': 'portfolio'
+    'database': 'portfolio',
+    'auth_plugin': 'mysql_native_password'
 }
 
 @app.route('/')

@@ -4,16 +4,21 @@ import requests
 import io
 import datetime
 import mysql.connector
+from datetime import datetime
+
+now = datetime.now()
+time = now.strftime("%Y-%m-%d %H:%M")
+
 
 db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': '12345678',
-    'database': 'portfolio'
+    'database': 'portfolio',
+    'auth_plugin': 'mysql_native_password'
 }
 
-datetime = datetime.datetime.now()
-print(datetime)
+
 
 url = "https://www.investing.com/commodities/metals"
 
@@ -33,20 +38,27 @@ soup = BeautifulSoup(response.text, "html.parser")
 #commodities = soup.find(class_="min-h-[50px] datatable-v2_table__93S4Y dynamic-table-v2_dynamic-table__iz42m datatable-v2_table--mobile-basic__uC0U0 datatable-v2_table--freeze-column__uGXoD undefined")
 commodities = soup.find(class_="min-h-[50px] datatable-v2_table__93S4Y dynamic-table-v2_dynamic-table__iz42m datatable-v2_table--mobile-basic__uC0U0 datatable-v2_table--freeze-column__uGXoD undefined")
 
+for element in commodities.find_all(class_=("datatable-v2_cell--name__derived__L4iTy md:hidden")):
+    element.decompose()
+
 html_data = io.StringIO(str(commodities))
 df = pd.read_html(html_data)
 dfs = df[0]
-#dfs.to_csv('commodities_current.csv', index=False)
+dfs.to_csv('commodities_current.csv', index=False)
 
 data_sql = pd.read_csv('commodities_current.csv')
-selected_columns = ['Name', 'Last']
-data_sql = data_sql[selected_columns]
+#selected_columns = ['Name', 'Last']
+#data_sql = data_sql[selected_columns]
 
 connection = mysql.connector.connect(**db_config)
 cursor = connection.cursor()
 
-cursor.execute("INSERT INTO COMMODITY_HISTORY (SYMBOL, TIME_STAMP, CURRENT_PRICE)"
-               "VALUES (%s, %s, %s)" ())
+for index, row in data_sql.iterrows():
+    symbol = row['Name']
+    last = row['Last']
+    cursor.execute("INSERT INTO COMMODITY_HISTORY (symbol, time_stamp, current_price) VALUES (%s, %s, %s)", (symbol, time, last, ))
 
-#with open("gold.html", 'w', encoding="utf-8") as file:
-#    file.write(commodities.prettify())
+connection.commit()
+connection.close()
+cursor.close()
+
