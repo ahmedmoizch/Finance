@@ -77,6 +77,26 @@ def psx():
 
     return render_template('psx.html', heads=heads, data=data)
 
+@app.route('/commodity', methods=['GET','POST'])
+def commodity():
+
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+    cursor.execute("select * from commodity_history")
+
+
+    heads = cursor.column_names
+    data = cursor.fetchall()
+
+    connection.close()
+    cursor.close()
+
+    return render_template('commodity.html', heads=heads, data=data)
+
+@app.route('/crypto', methods=['GET','POST'])
+def crypto():
+    return render_template('crypto.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,7 +2,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 import io
-import datetime
 import mysql.connector
 from datetime import datetime
 
