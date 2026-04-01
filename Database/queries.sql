@@ -35,3 +35,19 @@ CREATE TABLE psx_history (
   KEY idx_time_stamp (time_stamp),
   KEY idx_time_symbol (symbol,time_stamp)
 );
+
+# Commodity Cache
+create table commodity_cache (
+Symbol varchar(150) Not Null,
+Price decimal(10,2) DEFAULT NULL,
+Day decimal(10,2) DEFAULT NULL,
+% ,
+Weekly,
+Monthly,
+YTD,
+YoY,
+Date
+);
+
+
+Metals,Price,Day,%,Weekly,Monthly,YTD,YoY,Date
