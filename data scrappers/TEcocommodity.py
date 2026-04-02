@@ -49,7 +49,8 @@ if a == 1:
 #html_data = ("exa00mple.html"
 df = pd.read_html("TEcommodity.html")
 dfs = df[0]
-dfs.to_csv("TEcommodity.csv", index=False)
+path = "TEcommodity.csv"
+dfs.to_csv(path, index=False)
 
 
 #for element in commodities.find_all(class_=("datatable-v2_cell--name__derived__L4iTy md:hidden")):

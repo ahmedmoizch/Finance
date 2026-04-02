@@ -38,15 +38,15 @@ CREATE TABLE psx_history (
 
 # Commodity Cache
 create table commodity_cache (
-Symbol varchar(150) Not Null,
+Symbol varchar(150) Primary Key Not Null,
 Price decimal(10,2) DEFAULT NULL,
 Day decimal(10,2) DEFAULT NULL,
-% ,
-Weekly,
-Monthly,
-YTD,
-YoY,
-Date
+Percentage DECIMAL(8,5),
+Weekly DECIMAL(8,5),
+Monthly DECIMAL(8,5),
+YTD DECIMAL(8,5),
+YoY DECIMAL(8,5),
+Date_time datetime DEFAULT NULL
 );
 
 
