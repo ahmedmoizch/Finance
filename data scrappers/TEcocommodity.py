@@ -2,7 +2,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 import io
-import datetime
 import mysql.connector
 from datetime import datetime
 
@@ -32,7 +31,7 @@ headers = {
 }
 
 
-a = 1
+a = 2
 if a == 1:
     response = requests.get(url, headers = headers)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -45,12 +44,37 @@ if a == 1:
         file.write(target_table.prettify())
 
 
-
+"""
 #html_data = ("exa00mple.html"
 df = pd.read_html("TEcommodity.html")
 dfs = df[0]
 path = "TEcommodity.csv"
 dfs.to_csv(path, index=False)
+"""
+
+data = pd.read_csv('TEcommodity.csv')
+
+
+connection = mysql.connector.connect(**db_config)
+cursor = connection.cursor()
+
+for index, row in data.iterrows():
+    Symbol = row['Metals']
+    Price = row['Price']
+    Day = row['Day']
+    Percentage = row['%']
+    Weekly = row['Weekly']
+    Monthly = row['Monthly']
+    YTD = row['YTD']
+    YoY = row['YoY']
+    cursor.execute("INSERT INTO COMMODITY_CACHE VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                   (Symbol, Price, Day, Percentage, Weekly, Monthly, YTD, YoY, time,))
+
+
+
+connection.commit()
+cursor.close()
+connection.close()
 
 
 #for element in commodities.find_all(class_=("datatable-v2_cell--name__derived__L4iTy md:hidden")):
