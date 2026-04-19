@@ -2,12 +2,10 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 import io
-import datetime
 import mysql.connector
 from datetime import datetime
 
-now = datetime.now()
-time = now.strftime("%Y-%m-%d %H:%M")
+
 
 
 db_config = {
@@ -20,7 +18,7 @@ db_config = {
 
 
 
-url = "https://www.investing.com/commodities/metals"
+url = "https://tradingeconomics.com/commodities"
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
@@ -32,33 +30,49 @@ headers = {
 }
 
 
-response = requests.get(url, headers = headers)
-soup = BeautifulSoup(response.text, "html.parser")
+a = 2
+if a == 2:
+    response = requests.get(url, headers = headers)
+    soup = BeautifulSoup(response.text, "html.parser")
 
-#commodities = soup.find(class_="min-h-[50px] datatable-v2_table__93S4Y dynamic-table-v2_dynamic-table__iz42m datatable-v2_table--mobile-basic__uC0U0 datatable-v2_table--freeze-column__uGXoD undefined")
-commodities = soup.find(class_="min-h-[50px] datatable-v2_table__93S4Y dynamic-table-v2_dynamic-table__iz42m datatable-v2_table--mobile-basic__uC0U0 datatable-v2_table--freeze-column__uGXoD undefined")
+    commodities = soup.find_all("table")
+    target_table = commodities[1]
+    df = pd.read_html(io.StringIO(target_table.prettify()))[0]
+    #target_table['Monthly'] = target_table['Monthly'].str.replace('%', '').astype(float) / 100
 
-for element in commodities.find_all(class_=("datatable-v2_cell--name__derived__L4iTy md:hidden")):
-    element.decompose()
+    #with open("TEcommodity.html", "w", encoding="utf-8") as file:
+    #    file.write(df)
 
-html_data = io.StringIO(str(commodities))
-df = pd.read_html(html_data)
-dfs = df[0]
-dfs.to_csv('commodities_current.csv', index=False)
+    percent_cols = ['%', 'Weekly', 'Monthly', 'YTD', 'YoY']
+    for col in percent_cols:
+        if col in df.columns:
+            df[col] = (df[col].astype(str).str.replace('%', '').astype(float) / 100).round(4)
 
-data_sql = pd.read_csv('commodities_current.csv')
-#selected_columns = ['Name', 'Last']
-#data_sql = data_sql[selected_columns]
+
+df.to_csv('TEcommodity.csv', index=False)
+data = pd.read_csv("TEcommodity.csv")
+
 
 connection = mysql.connector.connect(**db_config)
 cursor = connection.cursor()
 
-for index, row in data_sql.iterrows():
-    symbol = row['Name']
-    last = row['Last']
-    cursor.execute("INSERT INTO COMMODITY_HISTORY (symbol, time_stamp, current_price) VALUES (%s, %s, %s)", (symbol, time, last, ))
+now = datetime.now()
+time = now.strftime("%Y-%m-%d %H:%M")
+
+for index, row in data.iterrows():
+    Symbol = row['Metals']
+    Price = row['Price']
+    Day = row['Day']
+    Percentage = row['%']
+    Weekly = row['Weekly']
+    Monthly = row['Monthly']
+    YTD = row['YTD']
+    YoY = row['YoY']
+    cursor.execute("INSERT INTO fixtemp values (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                   (Symbol, Price, Day, Percentage, Weekly, Monthly, YTD, YoY, time,))
+
+
 
 connection.commit()
-connection.close()
 cursor.close()
-
+connection.close()

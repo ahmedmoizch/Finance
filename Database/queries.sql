@@ -51,3 +51,22 @@ Date_time datetime DEFAULT NULL
 
 
 Metals,Price,Day,%,Weekly,Monthly,YTD,YoY,Date
+
+
+#Com Cache 
+create table fixtemp (
+Symbol varchar(150) Primary Key Not Null,
+`Price` decimal(10,2) DEFAULT NULL,
+`Day` decimal(10,2) DEFAULT NULL,
+`Percentage%` DECIMAL(5,4),
+`Weekly%` DECIMAL(5,4),
+`Monthly%` DECIMAL(5,4),
+`YTD%` DECIMAL(5,4),
+`YoY%` DECIMAL(5,4),
+`Date_time` datetime DEFAULT NULL
+);
+
+Query to retrive percentages
+SELECT Symbol, 
+       ROUND(`YoY%` * 100, 2) AS YoY_Display 
+FROM fixtemp;
