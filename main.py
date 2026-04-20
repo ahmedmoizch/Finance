@@ -82,7 +82,7 @@ def commodity():
 
     connection = mysql.connector.connect(**db_config)
     cursor = connection.cursor()
-    cursor.execute("select * from commodity_history")
+    cursor.execute("select * from commodity_cache")
 
 
     heads = cursor.column_names

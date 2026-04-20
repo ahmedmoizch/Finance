@@ -57,26 +57,29 @@ connection = mysql.connector.connect(**db_config)
 cursor = connection.cursor()
 
 now = datetime.now()
-time = now.strftime("%Y-%m-%d %H:%M")
+time = now.strftime("%Y-%m-%d %H:%M:%S")
 
-# MAKE TABLE EMPTY
-cursor.execute("TRUNCATE TABLE FIXTEMP")
-
-
-for index, row in data.iterrows():
-    Symbol = row['Metals']
-    Price = row['Price']
-    Day = row['Day']
-    Percentage = row['%']
-    Weekly = row['Weekly']
-    Monthly = row['Monthly']
-    YTD = row['YTD']
-    YoY = row['YoY']
-    cursor.execute("INSERT INTO fixtemp values (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                   (Symbol, Price, Day, Percentage, Weekly, Monthly, YTD, YoY, time,))
+def database():
+    # MAKE TABLE EMPTY
+    cursor.execute("TRUNCATE TABLE commodity_cache")
 
 
+    for index, row in data.iterrows():
+        Symbol = row['Metals']
+        Price = row['Price']
+        Day = row['Day']
+        Percentage = row['%']
+        Weekly = row['Weekly']
+        Monthly = row['Monthly']
+        YTD = row['YTD']
+        YoY = row['YoY']
+        cursor.execute("INSERT INTO commodity_cache values (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                       (Symbol, Price, Day, Percentage, Weekly, Monthly, YTD, YoY, time,))
 
-connection.commit()
-cursor.close()
-connection.close()
+
+
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+database()
