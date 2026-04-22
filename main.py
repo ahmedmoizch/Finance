@@ -54,7 +54,7 @@ def psx():
     """
     connection = mysql.connector.connect(**db_config)
     cursor = connection.cursor()
-
+    """
     selection = request.form.get('filter')
     if selection == 'Apple':
         cursor.execute("select * from psx_history")
@@ -67,7 +67,9 @@ def psx():
     #if data_filter == "high_vol":
         #cursor.execute("select * from psx_history"
                        #"order by volume ASC")
-
+                       """
+    cursor.execute('Select * from psx_cache')
+    
     data = cursor.fetchall()
     heads = cursor.column_names
 
