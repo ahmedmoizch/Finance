@@ -14,7 +14,8 @@ url = "https://dps.psx.com.pk/market-watch"
 # IMPORTING AND STORING DATA IN CSV FILE
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
-for element in soup.find_all(class_=['tag tag--skim tag--def', 'tag tag--skim tag--xd', 'tag tag--skim tag--def']):
+for element in soup.find_all(class_=['tag tag--skim tag--def', 'tag tag--skim tag--xd', 'tag tag--skim tag--def','tag tag--skim tag--xb']):
+#for element in soup.find_all(class_=['tbl__symbol']):
     element.decompose()
 
 """

@@ -1,9 +1,7 @@
-#Initial
 create database portfolio;
 use portfolio;
 
-
-# Commodities Historic Prices
+-- Commodities Historic Prices
 create table commodity_history(
 symbol  varchar(65) NOT NULL,
 time_stamp datetime DEFAULT NULL,
@@ -16,7 +14,7 @@ KEY idx_time_symbol (symbol,time_stamp)
 );
 
 
-# PSX Historic Prices
+-- PSX Historic Prices
 CREATE TABLE psx_history (
   symbol varchar(20) NOT NULL,
   time_stamp datetime DEFAULT NULL,
@@ -27,7 +25,7 @@ CREATE TABLE psx_history (
   KEY idx_time_symbol (symbol,time_stamp)
 );
 
-# Commodity Cache
+-- Commodity Cache
 create table commodity_cache (
 Symbol varchar(150) Primary Key Not Null,
 Price decimal(10,2) DEFAULT NULL,
@@ -42,7 +40,7 @@ Date_time datetime DEFAULT NULL
 
 
 
-#Com Cache 
+-- Com Cache 
 create table fixtemp (
 Symbol varchar(150) Primary Key Not Null,
 `Price` decimal(10,2) DEFAULT NULL,
@@ -55,12 +53,7 @@ Symbol varchar(150) Primary Key Not Null,
 `Date_time` datetime DEFAULT NULL
 );
 
-Query to retrive percentages
-SELECT Symbol, 
-       ROUND(`YoY%` * 100, 2) AS YoY_Display 
-FROM fixtemp;
-
-#Users
+-- Users
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,  
@@ -68,7 +61,8 @@ CREATE TABLE users (
     pass VARCHAR(255) NOT NULL
 );
 
-#Assetscreate table assets (
+-- Assets
+create table assets (
 asset VARCHAR(65) PRIMARY KEY,
 asset_name VARCHAR(120) Default Null,
 category ENUM('PSX', 'COMMODITY', 'CRYPTO')
