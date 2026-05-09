@@ -68,3 +68,21 @@ asset_name VARCHAR(120) Default Null,
 category ENUM('PSX', 'COMMODITY', 'CRYPTO')
 
 );
+
+
+-- PSX Cache
+CREATE TABLE `psx_cache` (
+  `Symbol` varchar(149) NOT NULL,
+  `Sector` smallint DEFAULT NULL,
+  `listed In` varchar(350) DEFAULT NULL,
+  `LDCP` decimal(10,2) DEFAULT NULL,
+  `Open` decimal(10,2) DEFAULT NULL,
+  `High` decimal(10,2) DEFAULT NULL,
+  `Low` decimal(10,2) DEFAULT NULL,
+  `Change` decimal(10,2) DEFAULT NULL,
+  `Current` decimal(10,2) DEFAULT NULL,
+  `Change (%)` decimal(5,4) DEFAULT NULL,
+  `Volume` decimal(15,2) DEFAULT NULL,
+  `Date_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`Symbol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
