@@ -19,6 +19,10 @@ db_config = {
 def home():
     return render_template('index.html')
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
@@ -81,6 +85,11 @@ def commodity():
 @app.route('/crypto', methods=['GET','POST'])
 def crypto():
     return render_template('crypto.html')
+
+@app.route('/holdings')
+def holdings():
+    
+    return render_template('holdings.html')
 
 
 if __name__ == '__main__':
