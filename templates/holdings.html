@@ -20,7 +20,7 @@
 <body>
     <div>
         <H1>Add to Your Portfolio</H1><br>
-        <form>
+        <form action='/holdings' method='POST'>
             <!--Radio Buttons for category-->
 
             <input type="radio" id="psx" name="asst_cat" value="PSX">
@@ -36,6 +36,8 @@
             <input type='text' placeholder="Name of Asset" name="asset_name">
             <input type='number' placeholder="Quantity" name="asset_quantity">
             <input type='number' placeholder="Comission" name="asset_comission">
+
+            <button type="submit">Submit</button><br>
         </form>
     </div>
     

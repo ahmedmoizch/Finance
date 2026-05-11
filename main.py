@@ -15,13 +15,16 @@ db_config = {
     'auth_plugin': 'mysql_native_password'
 }
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
 @app.route('/register')
 def register():
     return render_template('register.html')
+
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -48,7 +51,6 @@ def login():
     return render_template('login.html')
 
 
-
 @app.route('/psx', methods=['GET','POST'])
 def psx():
     
@@ -66,6 +68,7 @@ def psx():
 
     return render_template('psx.html', heads=heads, data=data)
 
+
 @app.route('/commodity', methods=['GET','POST'])
 def commodity():
 
@@ -82,13 +85,22 @@ def commodity():
 
     return render_template('commodity.html', heads=heads, data=data)
 
+
 @app.route('/crypto', methods=['GET','POST'])
 def crypto():
     return render_template('crypto.html')
 
-@app.route('/holdings')
+
+@app.route('/holdings', methods = ['GET','POST'])
 def holdings():
-    
+    if request.method == 'POST':
+        category = request.form.get("asst_cat")
+        asset_name = request.form.get("asset_name")
+        asset_quantity = request.form.get("asset_quantity")
+        asset_comission = request.form.get("asset_comission")
+
+        print(category,asset_name,asset_comission,asset_comission)
+
     return render_template('holdings.html')
 
 
