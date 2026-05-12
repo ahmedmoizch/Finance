@@ -86,3 +86,18 @@ CREATE TABLE `psx_cache` (
   `Date_time` datetime DEFAULT NULL,
   PRIMARY KEY (`Symbol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Holdings Table
+create table holdings(
+holding_id INT auto_increment primary key,
+user_id INT not Null,
+asset_symbol varchar(70) Not Null,
+asset_quantity DECIMAL(15,4) Not null,
+buy_price decimal(15,4) not null,
+comission decimal(10,2) default 0,
+purchase_date datetime default current_timestamp,
+
+-- Relationship (FK)
+Constraint fk_user FOREIGN KEY (user_id) references users(user_id) ON delete cascade,
+Constraint fk_symbol FOREIGN KEY (asset_symbol) references assets(asset)
+);

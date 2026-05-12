@@ -35,7 +35,7 @@ def login():
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
-        cursor.execute("select exists ( select 1 from user_login where email = (%s) AND pass = (%s) ) AS is_valid;", (username, passw))
+        cursor.execute("select exists ( select 1 from users where email = (%s) AND pass = (%s) ) AS is_valid;", (username, passw))
 
         result = cursor.fetchone()
         is_valid = result[0]
@@ -44,6 +44,7 @@ def login():
         connection.close()
 
         if is_valid == 1:
+            print("Login Successful")
             return redirect(url_for('home'))
         else:
             print("Login failed")
@@ -98,8 +99,23 @@ def holdings():
         asset_name = request.form.get("asset_name")
         asset_quantity = request.form.get("asset_quantity")
         asset_comission = request.form.get("asset_comission")
+        asset_price = request.form.get("asset_price")
+        user: int = 1
 
-        print(category,asset_name,asset_comission,asset_comission)
+
+
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        #query = ("INSERT INTO HOLDINGS (user_id, asset_symbol, asset_quantity, buy_price, comission) VALUES(%s,%s,%s,%s,%s)", (user,asset_name,asset_quantity,asset_price,asset_comission,))
+
+        cursor.execute("INSERT INTO HOLDINGS (user_id, asset_symbol, asset_quantity, buy_price, comission) VALUES(%s,%s,%s,%s,%s)", (user,asset_name,asset_quantity,asset_price,asset_comission,))
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+        print(category,asset_name,asset_quantity,asset_price,asset_comission)
 
     return render_template('holdings.html')
 
