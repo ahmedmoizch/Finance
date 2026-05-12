@@ -94,30 +94,36 @@ def crypto():
 
 @app.route('/holdings', methods = ['GET','POST'])
 def holdings():
+
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+
     if request.method == 'POST':
         category = request.form.get("asst_cat")
         asset_name = request.form.get("asset_name")
         asset_quantity = request.form.get("asset_quantity")
         asset_comission = request.form.get("asset_comission")
         asset_price = request.form.get("asset_price")
+
+        # Hardcoded for now
         user: int = 1
-
-
-
-        connection = mysql.connector.connect(**db_config)
-        cursor = connection.cursor()
-
-        #query = ("INSERT INTO HOLDINGS (user_id, asset_symbol, asset_quantity, buy_price, comission) VALUES(%s,%s,%s,%s,%s)", (user,asset_name,asset_quantity,asset_price,asset_comission,))
 
         cursor.execute("INSERT INTO HOLDINGS (user_id, asset_symbol, asset_quantity, buy_price, comission) VALUES(%s,%s,%s,%s,%s)", (user,asset_name,asset_quantity,asset_price,asset_comission,))
 
         connection.commit()
-        cursor.close()
-        connection.close()
-
         print(category,asset_name,asset_quantity,asset_price,asset_comission)
 
-    return render_template('holdings.html')
+    cursor.execute("SELECT holdings.asset_symbol, holdings.asset_quantity, holdings.buy_price, psx_cache.Current FROM holdings INNER JOIN psx_cache ON holdings.asset_symbol = psx_cache.symbol where holdings.user_id = 1;")
+
+    heads = cursor.column_names
+    data = cursor.fetchall()
+    print(heads,data)
+
+    cursor.close()
+    connection.close()
+
+    
+    return render_template('holdings.html', heads=heads, data=data)
 
 
 if __name__ == '__main__':
