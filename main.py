@@ -111,16 +111,16 @@ def holdings():
         cursor.execute("INSERT INTO HOLDINGS (user_id, asset_symbol, asset_quantity, buy_price, comission) VALUES(%s,%s,%s,%s,%s)", (user,asset_name,asset_quantity,asset_price,asset_comission,))
 
         connection.commit()
-        print(category,asset_name,asset_quantity,asset_price,asset_comission)
+        return redirect(url_for('holdings'))
+        #print(category,asset_name,asset_quantity,asset_price,asset_comission)
 
     cursor.execute("SELECT holdings.asset_symbol, holdings.asset_quantity, holdings.buy_price, psx_cache.Current FROM holdings INNER JOIN psx_cache ON holdings.asset_symbol = psx_cache.symbol where holdings.user_id = 1;")
-
-    heads = cursor.column_names
+    heads = ["Symbol",	"Quantity",	"buying",	"Current", "PnL"]
     data = cursor.fetchall()
-    print(heads,data)
 
     cursor.close()
     connection.close()
+
 
     
     return render_template('holdings.html', heads=heads, data=data)
