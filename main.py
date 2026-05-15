@@ -118,6 +118,7 @@ def holdings():
     heads = ["Symbol",	"Quantity",	"buying",	"Current", "PnL"]
     data = cursor.fetchall()
 
+    print(data)
     cursor.close()
     connection.close()
 
@@ -125,6 +126,10 @@ def holdings():
     
     return render_template('holdings.html', heads=heads, data=data)
 
+@app.route('/transactions', methods=['GET','POST'])
+def transactions():
+
+    return render_template('transactions.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
