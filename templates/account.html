@@ -3,15 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Account</title>
-    <link rel="stylesheet" href="\static\style.css">
+    <title>My Account - FinanceHub</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<div id="head_bar"></div>
-
 <body>
-<p>This is a page</p>
+    <header id="head_bar">
+        <div id="logo">
+            <span style="color: #3b82f6; font-weight: 700; font-size: 20px;">FinanceHub</span>
+        </div>
+        <nav style="display: flex; gap: 0; margin-left: auto; margin-right: 0;">
+            <div id="head_home" class="headings">Home</div>
+            <div id="head_myportfolio" class="headings">My Portfolio</div>
+            <div id="head_psx" class="headings">PSX</div>
+            <div id="head_commodity" class="headings">Commodities</div>
+            <div id="head_crypto" class="headings">Crypto</div>
+            <div id="head_my_account" class="headings active">My Account</div>
+            <div id="head_login" class="headings">Login</div>
+        </nav>
+    </header>
 
-    <!-- Your content goes here -->
-    <script src="script.js"></script>
+    <main class="page-wrapper">
+        <div class="container">
+            <div class="content-section">
+                <h2>Account Settings</h2>
+                <p style="color: #6b7280; margin-bottom: 1.5rem;">Manage your profile and preferences</p>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <h3>👤 Profile Information</h3>
+                    <p style="color: #6b7280; margin-top: 0.5rem;">Update your account details</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">Edit Profile</button>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <h3>🔐 Security</h3>
+                    <p style="color: #6b7280; margin-top: 0.5rem;">Change password and security settings</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">Change Password</button>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <h3>⚙️ Preferences</h3>
+                    <p style="color: #6b7280; margin-top: 0.5rem;">Manage notifications and preferences</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">Edit Preferences</button>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem; border-left: 4px solid #ef4444;">
+                    <h3 style="color: #ef4444;">⚠️ Danger Zone</h3>
+                    <p style="color: #6b7280; margin-top: 0.5rem;">Permanently delete your account</p>
+                    <button class="btn btn-danger" style="margin-top: 1rem;">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>

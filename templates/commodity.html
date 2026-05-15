@@ -1,43 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commodities</title>
-    <link rel="stylesheet" href="\static\style.css">
+    <title>Commodities - FinanceHub</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<div id="head_bar">
-    <!--<div id="logo"><img src="/static/logo.png"></div>-->
-    <div id="head_home" class="headings">Home</div>
-    <div id="head_myportfolio" class="headings">My Portfolio</div>
-    <div id="head_psx" class="headings">PSX</div>
-    <div id="head_commodity" class="headings">Commodities</div>
-    <div id="head_crypto" class="headings">Crypto</div>
-    <div id="head_my_account" class="headings">My Account</div>
-    <div id="head_login" class="headings">Login</div>
-
-</div>
-
 <body>
-<div>
-    <table>
-        <thead>
-            <tr style="background-color: #f2f2f2;">
-            {%for column in heads%}
-            <th style="padding: 10px; text-align: left;">{{column}}</th>
-            {% endfor %}
-            </tr>
-        <tbody>
-            {%for row in data%}
-            <tr>
-            {%for item in row%}
-            <td style="padding: 8px; border: 1px solid #ddd;">{{item}} </td>
-            {%endfor%}
-            </tr>
-            {%endfor%}
-    </tbody>
-    </table>
+    <header id="head_bar">
+        <div id="logo">
+            <span style="color: #3b82f6; font-weight: 700; font-size: 20px;">FinanceHub</span>
+        </div>
+        <nav style="display: flex; gap: 0; margin-left: auto; margin-right: 0;">
+            <div id="head_home" class="headings">Home</div>
+            <div id="head_myportfolio" class="headings">My Portfolio</div>
+            <div id="head_psx" class="headings">PSX</div>
+            <div id="head_commodity" class="headings active">Commodities</div>
+            <div id="head_crypto" class="headings">Crypto</div>
+            <div id="head_my_account" class="headings">My Account</div>
+            <div id="head_login" class="headings">Login</div>
+        </nav>
+    </header>
 
-</div>
+    <main class="page-wrapper">
+        <div class="container">
+            <div class="content-section">
+                <h2>Commodity Markets</h2>
+                <p style="margin-bottom: 1.5rem; color: #6b7280;">Track commodity prices and trends</p>
+
+                {% if data %}
+                <div style="overflow-x: auto;">
+                    <table class="table-striped">
+                        <thead>
+                            <tr>
+                                {% for column in heads %}
+                                <th>{{ column }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in data %}
+                            <tr>
+                                {% for item in row %}
+                                <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    📭 No data available. Please try again later.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>

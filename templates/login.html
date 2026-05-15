@@ -3,20 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Account</title>
-    <link rel="stylesheet" href="\static\style.css">
+    <title>Login - FinanceHub</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<header><div id="head_bar"></div></header>
-<div id="login_form">
-    <form action='/login' method='POST'>
-        <br>
-        <input type='username' placeholder="Email" name="login_email"><br><br>
-        <input type='password' placeholder="Password" name="login_password"><br><br>
-        <button type="submit">Login</button><br>
-    </form>
-    <a href="https://www.youtube.com"><button>Register</button></a>
-</div>
-    <script src="script.js"></script>
+    <header id="head_bar">
+        <div id="logo">
+            <span style="color: #3b82f6; font-weight: 700; font-size: 20px;">FinanceHub</span>
+        </div>
+        <nav style="display: flex; gap: 0; margin-left: auto; margin-right: 0;">
+            <div id="head_home" class="headings">Home</div>
+            <div id="head_myportfolio" class="headings">My Portfolio</div>
+            <div id="head_psx" class="headings">PSX</div>
+            <div id="head_commodity" class="headings">Commodities</div>
+            <div id="head_crypto" class="headings">Crypto</div>
+            <div id="head_my_account" class="headings">My Account</div>
+            <div id="head_login" class="headings active">Login</div>
+        </nav>
+    </header>
+
+    <main class="page-wrapper">
+        <div class="auth-form">
+            <h2 class="form-title">Welcome Back</h2>
+            <p class="form-subtitle">Sign in to your account to continue</p>
+
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="login_email">Email Address</label>
+                    <input type="email" id="login_email" name="login_email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login_password">Password</label>
+                    <input type="password" id="login_password" name="login_password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="form-footer">
+                Don't have an account? <a href="/register">Sign up here</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>

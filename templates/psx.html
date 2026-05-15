@@ -1,54 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSX</title>
-    <link rel="stylesheet" href="\static\style.css">
+    <title>PSX - FinanceHub</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
-    <!--
-<div id="head_bar"></div>
-<div id="filter">
-    <H2>Filters</H2>
+    <header id="head_bar">
+        <div id="logo">
+            <span style="color: #3b82f6; font-weight: 700; font-size: 20px;">FinanceHub</span>
+        </div>
+        <nav style="display: flex; gap: 0; margin-left: auto; margin-right: 0;">
+            <div id="head_home" class="headings">Home</div>
+            <div id="head_myportfolio" class="headings">My Portfolio</div>
+            <div id="head_psx" class="headings active">PSX</div>
+            <div id="head_commodity" class="headings">Commodities</div>
+            <div id="head_crypto" class="headings">Crypto</div>
+            <div id="head_my_account" class="headings">My Account</div>
+            <div id="head_login" class="headings">Login</div>
+        </nav>
+    </header>
 
-<form action="/psx" method="POST">
-  <p>Select your favorite fruit:</p>
-  <input type="radio" id="apple" name="filter" value="Apple" onchange="this.form.submit()">
-  <label for="apple">Apple</label><br>
+    <main class="page-wrapper">
+        <div class="container">
+            <div class="content-section">
+                <h2>Pakistan Stock Exchange (PSX)</h2>
+                <p style="margin-bottom: 1.5rem; color: #6b7280;">Real-time PSX securities data</p>
 
-  <input type="radio" id="banana" name="filter" value="Banana" onchange="this.form.submit()">
-  <label for="banana">Banana</label><br>
+                {% if data %}
+                <div style="overflow-x: auto;">
+                    <table class="table-striped">
+                        <thead>
+                            <tr>
+                                {% for column in heads %}
+                                <th>{{ column }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in data %}
+                            <tr>
+                                {% for item in row %}
+                                <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    📭 No data available. Please try again later.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
 
-  <input type="radio" id="cherry" name="filter" value="Cherry" onchange="this.form.submit()">
-  <label for="cherry">Cherry</label><br>
-
-</form> 
--->
-
-</div>
-<div id="psx_data">
-    <table>
-        <thead>
-            <tr style="background-color: #f2f2f2;">
-            {%for column in heads%}
-            <th style="padding: 10px; text-align: left;">{{column}}</th>
-            {% endfor %}
-            </tr>
-        </thead>
-
-        <tbody>
-            {%for row in data%}
-            <tr>
-            {%for item in row%}
-            <td style="padding: 8px; border: 1px solid #ddd;">{{item}} </td>
-            {%endfor%}
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
-</div>
-
+    <script src="/static/script.js"></script>
 </body>
 </html>

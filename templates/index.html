@@ -3,22 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="\static\style.css">
+    <title>Portfolio - Finance Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<div id="head_bar">
-    <!--<div id="logo"><img src="/static/logo.png"></div>-->
-    <div id="head_home" class="headings">Home</div>
-    <div id="head_myportfolio" class="headings">My Portfolio</div>
-    <div id="head_psx" class="headings">PSX</div>
-    <div id="head_commodity" class="headings">Commodities</div>
-    <div id="head_crypto" class="headings">Crypto</div>
-    <div id="head_my_account" class="headings">My Account</div>
-    <div id="head_login" class="headings">Login</div>
-
-</div>
 <body>
-    <!-- Your content goes here -->
-    <script src="script.js"></script>
+    <header id="head_bar">
+        <div id="logo">
+            <!--<img src="/static/logo.png" alt="Logo">-->
+            <span style="color: #3b82f6; font-weight: 700; font-size: 20px;">FinanceHub</span>
+        </div>
+        <nav style="display: flex; gap: 0; margin-left: auto; margin-right: 0;">
+            <div id="head_home" class="headings active">Home</div>
+            <div id="head_myportfolio" class="headings">My Portfolio</div>
+            <div id="head_psx" class="headings">PSX</div>
+            <div id="head_commodity" class="headings">Commodities</div>
+            <div id="head_crypto" class="headings">Crypto</div>
+            <div id="head_my_account" class="headings">My Account</div>
+            <div id="head_login" class="headings">Login</div>
+        </nav>
+    </header>
+
+    <main class="page-wrapper">
+        <div class="container">
+            <!-- Hero Section -->
+            <section style="text-align: center; margin-bottom: 3rem;">
+                <h1>Welcome to FinanceHub</h1>
+                <p style="font-size: 18px; color: #6b7280; margin-bottom: 2rem;">
+                    Track your investments across PSX, Cryptocurrencies, and Commodities in one place
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='/holdings'">View Portfolio</button>
+                    <button class="btn btn-secondary btn-lg" onclick="window.location.href='/register'">Get Started</button>
+                </div>
+            </section>
+
+            <!-- Features Grid -->
+            <div class="stats-grid" style="margin-top: 3rem;">
+                <div class="card">
+                    <h3 style="color: #3b82f6; margin-bottom: 0.5rem;">📈 PSX Tracking</h3>
+                    <p>Monitor Pakistan Stock Exchange securities in real-time</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #f59e0b; margin-bottom: 0.5rem;">🪙 Crypto Assets</h3>
+                    <p>Track your cryptocurrency investments and holdings</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #10b981; margin-bottom: 0.5rem;">📦 Commodities</h3>
+                    <p>Manage commodity investments and price changes</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #ef4444; margin-bottom: 0.5rem;">📊 Analytics</h3>
+                    <p>View detailed P&L and portfolio performance metrics</p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <section class="content-section" style="text-align: center; margin-top: 3rem;">
+                <h2>Ready to manage your portfolio?</h2>
+                <p style="margin-bottom: 1.5rem;">Join thousands of investors tracking their wealth</p>
+                <button class="btn btn-primary btn-lg" onclick="window.location.href='/login'">Sign In Now</button>
+            </section>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>

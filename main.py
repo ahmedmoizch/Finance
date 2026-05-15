@@ -118,7 +118,6 @@ def holdings():
     heads = ["Symbol",	"Quantity",	"buying",	"Current", "PnL"]
     data = cursor.fetchall()
 
-    print(data)
     cursor.close()
     connection.close()
 

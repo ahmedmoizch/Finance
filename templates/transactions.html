@@ -1,23 +1,114 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transactions</title>
-    <link rel="stylesheet" href="\static\style.css">
+    <title>Transactions - FinanceHub</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<div id="head_bar">
-    <!--<div id="logo"><img src="/static/logo.png"></div>-->
-    <div id="head_home" class="headings">Home</div>
-    <div id="head_myportfolio" class="headings">My Portfolio</div>
-    <div id="head_psx" class="headings">PSX</div>
-    <div id="head_commodity" class="headings">Commodities</div>
-    <div id="head_crypto" class="headings">Crypto</div>
-    <div id="head_my_account" class="headings">My Account</div>
-    <div id="head_login" class="headings">Login</div>
-
-</div>
 <body>
+    <header id="head_bar">
+        <div id="logo">
+            <span style="color: #3b82f6; font-weight: 700; font-size: 20px;">FinanceHub</span>
+        </div>
+        <nav style="display: flex; gap: 0; margin-left: auto; margin-right: 0;">
+            <div id="head_home" class="headings">Home</div>
+            <div id="head_myportfolio" class="headings">My Portfolio</div>
+            <div id="head_psx" class="headings">PSX</div>
+            <div id="head_commodity" class="headings">Commodities</div>
+            <div id="head_crypto" class="headings">Crypto</div>
+            <div id="head_my_account" class="headings">My Account</div>
+            <div id="head_login" class="headings">Login</div>
+        </nav>
+    </header>
+    <main class="page-wrapper">
+        <div class="container">
+            <!-- Add Holdings Section -->
+            <div class="content-section">
+                <h2>Add to Your Portfolio</h2>
+                <p style="margin-bottom: 1.5rem;">Add new assets to track your investments</p>
 
+                <form action="/holdings" method="POST">
+                    <!-- Asset Category -->
+                    <div class="form-group">
+                        <label>Asset Category</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="asst_cat" value="PSX" required>
+                                📈 PSX
+                            </label>
+                            <label>
+                                <input type="radio" name="asst_cat" value="commodity">
+                                📦 Commodity
+                            </label>
+                            <label>
+                                <input type="radio" name="asst_cat" value="crypto">
+                                🪙 Crypto
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Asset Details Grid -->
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="asset_name">Asset Name</label>
+                            <input type="text" id="asset_name" name="asset_name" placeholder="e.g., ENGRO" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="asset_quantity">Quantity</label>
+                            <input type="number" id="asset_quantity" name="asset_quantity" placeholder="0.00" step="any" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="asset_price">Buy Price</label>
+                            <input type="number" id="asset_price" name="asset_price" placeholder="0.00" step="any" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="asset_comission">Commission</label>
+                            <input type="number" id="asset_comission" name="asset_comission" placeholder="0.00" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="margin-top: 1rem;">
+                        ✓ Add to Portfolio
+                    </button>
+                </form>
+            </div>
+        
+    
+                <h2>Transaction History</h2>
+                <p style="color: #6b7280; margin-bottom: 1.5rem;">View all your portfolio transactions</p>
+
+                <div class="alert alert-info">
+                    📋 Transaction history feature coming soon!
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <h3>Search Transactions</h3>
+                    <div class="form-group-inline" style="margin-top: 1rem;">
+                        <div class="form-group">
+                            <label for="transaction_date">Date</label>
+                            <input type="date" id="transaction_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="transaction_type">Type</label>
+                            <select id="transaction_type">
+                                <option value="">All Types</option>
+                                <option value="buy">Buy</option>
+                                <option value="sell">Sell</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transaction_asset">Asset</label>
+                            <input type="text" id="transaction_asset" placeholder="Search asset...">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">Search</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="/static/script.js"></script>
 </body>
 </html>
