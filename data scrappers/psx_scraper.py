@@ -73,6 +73,14 @@ for index, row in data.iterrows():
                     (symbol,sector,listedin,ldcp,open,high,low,change,current,current_per,volume,time,))
 
 
+# PSX HISTORY TABLE
+for index, row in data.iterrows():
+    symbol = row['SYMBOL']
+    current = row['CURRENT']
+    volume = row['VOLUME']
+    cursor.execute("INSERT INTO psx_history (Symbol,time_stamp,current_price,Volume)VALUES (%s,%s,%s,%s)",
+                    (symbol,time,current,volume,))
+
 #insert into historic_data_psx values
 connection.commit()
 

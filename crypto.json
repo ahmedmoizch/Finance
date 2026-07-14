@@ -1,0 +1,25 @@
+{
+    "status": "success",
+    "symbols": [
+        {
+            "symbol": "BTC",
+            "last": "62896.85",
+            "last_btc": "1",
+            "lowest": "62596",
+            "highest": "64310",
+            "date": "2026-07-13 14:58:08",
+            "daily_change_percentage": "-2.0281500150314",
+            "source_exchange": "binance"
+        },
+        {
+            "symbol": "ETH",
+            "last": "1781.14",
+            "last_btc": "0.028318429301308",
+            "lowest": "1775.79",
+            "highest": "1839.96",
+            "date": "2026-07-13 14:58:08",
+            "daily_change_percentage": "-2.2028705401755",
+            "source_exchange": "binance"
+        }
+    ]
+}
