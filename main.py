@@ -114,9 +114,16 @@ def holdings():
         return redirect(url_for('holdings'))
         #print(category,asset_name,asset_quantity,asset_price,asset_comission)
 
+    cursor.execute("SELECT holdings.asset_symbol, Round (holdings.asset_quantity, 1), Round (holdings.buy_price,2), psx_cache.Current, Round ((holdings.asset_quantity*psx_cache.current)-(holdings.asset_quantity*holdings.buy_price), 2) as PnL FROM holdings INNER JOIN psx_cache ON holdings.asset_symbol = psx_cache.symbol where holdings.user_id = 1;")
+    heads = ["Symbol",	"Quantity",	"buying",	"Current", "PnL"]
+    data = cursor.fetchall()
+
+
+    """
     cursor.execute("SELECT holdings.asset_symbol, holdings.asset_quantity, holdings.buy_price, psx_cache.Current FROM holdings INNER JOIN psx_cache ON holdings.asset_symbol = psx_cache.symbol where holdings.user_id = 1;")
     heads = ["Symbol",	"Quantity",	"buying",	"Current", "PnL"]
     data = cursor.fetchall()
+    """
 
     cursor.close()
     connection.close()
